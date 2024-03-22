@@ -1,8 +1,8 @@
 const navigation = document.querySelectorAll('nav a')
 let scrollBack = 0
-
+let local = 'http://localhost:3000/'
 function fetchAndRenderMenuData(menuType) {
-    fetch(`http://localhost:3000/get${menuType.slice(1)}`)
+    fetch(`https://web-9p7n.onrender.com/get${menuType.slice(1)}`)
         .then(res => res.text())
         .then(d => {
             let arr = JSON.parse(d)
