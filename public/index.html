@@ -28,7 +28,7 @@
             <ul>
                 <li>
                     <img src="./images/nav-icons/Бургеры.png" alt="">
-                    <p>Бургеры</p>
+                    <a href="/">Бургеры</a>
                 </li>
                 <li>
                     <img src="./images/nav-icons/Закуски.png" alt="">
@@ -89,85 +89,16 @@
                             <button>+</button>
                         </div>
                     </li>
-                    <li>
-                        <img src="./images/gavno.jpg" alt="">
-                        <section>
-                            <p>Супер сырный</p>
-                            <p>512г</p>
-                            <p>550грн</p>
-                        </section>
-                        <div class="minus-plus">
-                            <button>-</button>
-                            <div>1</div>
-                            <button>+</button>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="./images/gavno.jpg" alt="">
-                        <section>
-                            <p>Супер сырный</p>
-                            <p>512г</p>
-                            <p>550грн</p>
-                        </section>
-                        <div class="minus-plus">
-                            <button>-</button>
-                            <div>1</div>
-                            <button>+</button>
-                        </div>
-                    </li>
                 </ul>
                 <div id="checkout"><span>Итого</span> <span>228грн</span></div>
-                <button id="makeorder">Оформить заказ</button>
+                <button id="makeorder" class="btn-darkorange">Оформить заказ</button>
                 <div class="delivery">
                     <div id="free-delivery"><img src="./images/delivery.png" alt="">Бесплатная доставка</div>
                     <button id="hide-delivery">Свернуть</button>
                 </div>
             </aside>
             <section>
-                <ul>
-                    <li>
-                        <img src="./images/gavno.jpg" alt="">
-                        <p>600грн</p>
-                        <p>Мясная бомба</p>
-                        <p>520г</p>
-                        <button>Добавить</button>
-                    </li>
-                    <li>
-                        <img src="./images/gavno.jpg" alt="">
-                        <p>600грн</p>
-                        <p>Мясная бомба</p>
-                        <p>520г</p>
-                        <button>Добавить</button>
-                    </li>
-                    <li>
-                        <img src="./images/gavno.jpg" alt="">
-                        <p>600грн</p>
-                        <p>Мясная бомба</p>
-                        <p>520г</p>
-                        <button>Добавить</button>
-                    </li>
-                    <li>
-                        <img src="./images/gavno.jpg" alt="">
-                        <p>600грн</p>
-                        <p>Мясная бомба</p>
-                        <p>520г</p>
-                        <button>Добавить</button>
-                    </li>
-                    <li>
-                        <img src="./images/gavno.jpg" alt="">
-                        <p>600грн</p>
-                        <p>Мясная бомба</p>
-                        <p>520г</p>
-                        <button>Добавить</button>
-                    </li>
-                    <li>
-                        <img src="./images/gavno.jpg" alt="">
-                        <p>600грн</p>
-                        <p>Мясная бомба</p>
-                        <p>520г</p>
-                        <button>Добавить</button>
-                    </li>
-                </ul>
+                <ul id="menudata"></ul>
             </section>
         </div>
     </main>
@@ -187,6 +118,34 @@
             </div>
         </div>
     </footer>
+
+    <div id="overlay">
+        <div class="delivery-modal">
+            <div>
+                <img src="./images/modal-logo.svg" alt="">
+            </div>
+            <form>
+                <h3>Доставка</h3>
+                <input type="text" placeholder="Ваше имя">
+                <input type="text" placeholder="Телефон">
+                <div class="radio-btns">
+                    <label for="samoviviz"><input checked type="radio" name="deliver" id="samoviviz">Самовывоз</label>
+                    <label for="dostavka"><input type="radio" name="deliver" id="dostavka">Доставка</label>
+                </div>
+                <div id="delivery-address">
+                    <input type="text" placeholder="Улица, дом, квартира">
+                    <div>
+                        <input type="text" placeholder="Этаж">
+                        <input type="text" placeholder="Домофон">
+                    </div>
+                </div>
+                <button class="btn-darkorange">Оформить</button>
+            </form>
+            <span id="close-overlay"></span>
+        </div>
+    </div>
+
+    <script src="./scripts/burgers.js"></script>
 </body>
 
 </html>
