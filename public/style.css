@@ -136,7 +136,7 @@ main {
     /* flex-grow: 1; */
 }
 
-h2 {
+#type-of-products {
     font-size: 40px;
     margin-left: 330px;
 }
@@ -287,9 +287,10 @@ aside ul li section p:nth-child(2) {
 .minus-plus :first-child {
     /* padding-right: 17px;
     padding-left: 13px; */
-    padding: 11px 13px;
+    padding: 9px 12px;
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
+    font-size: 16px;
 }
 
 .minus-plus :nth-child(2) {
@@ -299,9 +300,10 @@ aside ul li section p:nth-child(2) {
 .minus-plus :last-child {
     /* padding-left: 17px;
     padding-right: 13px; */
-    padding: 11px 13px;
+    padding: 9px 12px;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
+    font-size: 16px;
 }
 
 #checkout {
@@ -342,13 +344,19 @@ aside ul li section p:nth-child(2) {
     visibility: hidden;
 }
 
-.delivery-modal {
+.overlay-control {
     width: 684px;
     height: 432px;
-    display: flex;
-    position: relative;
     overflow: hidden;
     border-radius: 24px;
+    position: relative;
+}
+
+.delivery-modal {
+    position: relative;
+    display: flex;
+    height: 100%;
+    display: none;
 }
 
 .delivery-modal form {
@@ -413,6 +421,7 @@ input[type=radio] {
     border-radius: 12px;
     color: white;
     line-height: 16px;
+    font-size: 16px;
 }
 
 .btn-darkorange:active {
@@ -485,4 +494,65 @@ label {
 #delivery-address div {
     display: flex;
     gap: 8px;
+}
+
+.single-product {
+    background-color: rgba(255, 255, 255, 1);
+    height: 100%;
+    padding: 24px 24px 36px 24px;
+    display: none;
+}
+
+.single-product h2 {
+    font-weight: 600;
+    line-height: 48px;
+    font-size: 40px;
+}
+
+.single-product img {
+    height: 220px;
+    min-width: 276px;
+    border-radius: 16px;
+}
+
+.single-product figure {
+    margin-top: 24px;
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+}
+
+.single-product figure p {
+    line-height: 20.8px;
+    font-size: 16px;
+}
+
+.single-product figure dl {
+    line-height: 15.6px;
+}
+
+.single-product figure dt {
+    margin: 10px 0 4px 0;
+}
+
+.single-product-btns {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+    gap: 16px;
+}
+
+.single-product-btns :first-child {
+    max-width: 276px;
+}
+
+.single-product-btns p {
+    font-size: 24px;
+    line-height: 31.2px;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+#checkout-wrapper {
+    display: none;
 }

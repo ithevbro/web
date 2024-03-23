@@ -26,18 +26,25 @@
         </section>
         <nav>
             <ul>
-                <li>
-                    <img src="./images/nav-icons/Бургеры.png" alt="">
-                    <a href="/">Бургеры</a>
-                </li>
-                <li>
-                    <img src="./images/nav-icons/Закуски.png" alt="">
-                    <a href="/zakuski">Закуски</a>
-                </li>
-                <li>
-                    <img src="./images/nav-icons/Хот-доги.png" alt="">
-                    <a href="/hotdogs">Хот-доги</a>
-                </li>
+                <a href="/">
+                    <li>
+                        <img src="./images/nav-icons/Бургеры.png" alt="">
+                        <span>Бургеры</span>
+                    </li>
+                </a>
+                <a href="/zakuski">
+                    <li>
+                        <img src="./images/nav-icons/Закуски.png" alt="">
+                        <span>Закуски</span>
+                    </li>
+                </a>
+                <a href="/hotdogs">
+                    <li>
+                        <img src="./images/nav-icons/Хот-доги.png" alt="">
+                        <span>Хот-доги</span>
+
+                    </li>
+                </a>
                 <li>
                     <img src="./images/nav-icons/Комбо.png" alt="">
                     <p>Комбо</p>
@@ -67,16 +74,16 @@
     </header>
 
     <main>
-        <h2>Бургеры</h2>
+        <h2 id="type-of-products">Бургеры</h2>
         <div class="main-container">
             <aside>
                 <div class="cart">
                     <h3>Корзина</h3>
                     <p id="cart-count">0</p>
                 </div>
-                <!-- <p>Тут пока пусто :(</p> -->
-                <ul>
-                    <li>
+                <p id="cart-empty">Тут пока пусто :(</p>
+                <ul id="cart-products">
+                    <!-- <li>
                         <img src="./images/gavno.jpg" alt="">
                         <section>
                             <p>Супер сырный</p>
@@ -88,13 +95,16 @@
                             <div>1</div>
                             <button>+</button>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
-                <div id="checkout"><span>Итого</span> <span>228грн</span></div>
-                <button id="makeorder" class="btn-darkorange">Оформить заказ</button>
-                <div class="delivery">
-                    <div id="free-delivery"><img src="./images/delivery.png" alt="">Бесплатная доставка</div>
-                    <button id="hide-delivery">Свернуть</button>
+
+                <div id="checkout-wrapper">
+                    <div id="checkout"><span>Итого</span> <span>228грн</span></div>
+                    <button id="makeorder" class="btn-darkorange">Оформить заказ</button>
+                    <div class="delivery">
+                        <div id="free-delivery"><img src="./images/delivery.png" alt="">Бесплатная доставка</div>
+                        <button id="hide-delivery">Свернуть</button>
+                    </div>
                 </div>
             </aside>
             <section>
@@ -120,27 +130,61 @@
     </footer>
 
     <div id="overlay">
-        <div class="delivery-modal">
-            <div>
-                <img src="./images/modal-logo.svg" alt="">
-            </div>
-            <form>
-                <h3>Доставка</h3>
-                <input type="text" placeholder="Ваше имя">
-                <input type="text" placeholder="Телефон">
-                <div class="radio-btns">
-                    <label for="samoviviz"><input checked type="radio" name="deliver" id="samoviviz">Самовывоз</label>
-                    <label for="dostavka"><input type="radio" name="deliver" id="dostavka">Доставка</label>
+        <div class="overlay-control">
+            <div class="delivery-modal">
+                <div>
+                    <img src="./images/modal-logo.svg" alt="">
                 </div>
-                <div id="delivery-address">
-                    <input type="text" placeholder="Улица, дом, квартира">
-                    <div>
-                        <input type="text" placeholder="Этаж">
-                        <input type="text" placeholder="Домофон">
+                <form>
+                    <h3>Доставка</h3>
+                    <input type="text" placeholder="Ваше имя">
+                    <input type="text" placeholder="Телефон">
+                    <div class="radio-btns">
+                        <label for="samoviviz"><input checked type="radio" name="deliver"
+                                id="samoviviz">Самовывоз</label>
+                        <label for="dostavka"><input type="radio" name="deliver" id="dostavka">Доставка</label>
                     </div>
-                </div>
-                <button class="btn-darkorange">Оформить</button>
-            </form>
+                    <div id="delivery-address">
+                        <input type="text" placeholder="Улица, дом, квартира">
+                        <div>
+                            <input type="text" placeholder="Этаж">
+                            <input type="text" placeholder="Домофон">
+                        </div>
+                    </div>
+                    <button class="btn-darkorange">Оформить</button>
+                </form>
+            </div>
+            <div class="single-product">
+                <!-- <div>
+                    <h2>мясная бомба</h2>
+                    <figure>
+                        <img src="./images/gavno.jpg" alt="">
+                        <figcaption>
+                            <p>Супер мясное наслаждение! Большая рубленая котлета из свежего говяжего мяса покорит вас
+                                своей сочностью, а хрустящие листья салата добавят свежести.</p>
+                            <dl>
+                                <dt>Состав:</dt>
+                                <dd>Пшеничная булочка</dd>
+                                <dd>Котлета из говядины</dd>
+                                <dd>Красный лук</dd>
+                                <dd>Листья салата</dd>
+                                <dd>Соус горчичный</dd>
+                            </dl>
+                            <span>520г, ккал 430</span>
+                        </figcaption>
+                    </figure>
+
+                    <div class="single-product-btns">
+                        <button class="btn-darkorange">Добавить</button>
+                        <div class="minus-plus">
+                            <button>-</button>
+                            <div>1</div>
+                            <button>+</button>
+                        </div>
+                        <p>600</p>
+                    </div>
+                </div> -->
+            </div>
             <span id="close-overlay"></span>
         </div>
     </div>
