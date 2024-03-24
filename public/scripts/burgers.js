@@ -54,11 +54,12 @@ function fetchAndRenderMenuData(menuType) {
                 `
                 cartProducts.innerHTML += li
             }
-            document.getElementById('cart-empty').style.display = 'none'
-            if (inCart) {
-                // console.log(allProductsData);
+
+            if (Object.keys(inCart).length) {
+                document.getElementById('cart-empty').style.display = 'none'
                 setCartProductsListeners()
             }
+
         })
 }
 
@@ -183,12 +184,12 @@ document.querySelector('.single-product').onclick = (e) => {
             allProductsData[id].qunt += 1
             document.getElementById(`cartProducts-${id}`).textContent = allProductsData[id].qunt
             counter.textContent = allProductsData[id].qunt
+            cart_count.textContent = +cart_count.textContent + 1
         }
         else {
             allProductsData[id].qunt += 1
             counter.textContent = allProductsData[id].qunt
         }
-        // cart_count.textContent = +cart_count.textContent + 1
     }
     if (minus) {
         if (inCart && inCart[id]) {
@@ -196,11 +197,11 @@ document.querySelector('.single-product').onclick = (e) => {
             allProductsData[id].qunt -= 1
             document.getElementById(`cartProducts-${id}`).textContent = allProductsData[id].qunt
             counter.textContent = allProductsData[id].qunt
+            cart_count.textContent = +cart_count.textContent - 1
         } else {
             allProductsData[id].qunt -= 1
             counter.textContent = allProductsData[id].qunt
         }
-        // cart_count.textContent = +cart_count.textContent - 1
     }
     if (btn) {
         if (!inCart || inCart[id] == undefined) {
@@ -219,6 +220,7 @@ document.querySelector('.single-product').onclick = (e) => {
         </li>
         `
             cartProducts.innerHTML += li
+            cart_count.textContent = +cart_count.textContent + +counter.textContent
             document.getElementById('cart-empty').style.display = 'none'
             hideOverlay()
             setCartProductsListeners()
@@ -245,13 +247,15 @@ function setCartProductsListeners() {
                 inCart[id].qunt += 1
                 allProductsData[id].qunt += 1
                 counter.textContent = allProductsData[id].qunt
-                // cart_count.textContent = +cart_count.textContent + 1
+                cart_count.textContent = +cart_count.textContent + 1
+                saveCartToLocal()
             }
             else if (minus) {
                 inCart[id].qunt -= 1
                 allProductsData[id].qunt -= 1
                 counter.textContent = allProductsData[id].qunt
-                // cart_count.textContent = +cart_count.textContent - 1
+                cart_count.textContent = +cart_count.textContent - 1
+                saveCartToLocal()
             }
         }
     }
@@ -259,8 +263,20 @@ function setCartProductsListeners() {
 
 function saveCartToLocal() {
     localStorage.setItem('cart', JSON.stringify(inCart))
+    localStorage.setItem('items', JSON.stringify(cart_count.textContent))
 }
 
 function getCartFromLocal() {
+    if (JSON.parse(localStorage.getItem('items'))) {
+        cart_count.textContent = JSON.parse(localStorage.getItem('items'))
+    }
     return JSON.parse(localStorage.getItem('cart'))
+}
+
+function sumPrice() {
+    let sum = 0
+    for (const key in inCart) {
+        sum += inCart[key].price * inCart[key].qunt
+    }
+    // cart_count.textContent = sum
 }
