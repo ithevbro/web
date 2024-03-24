@@ -54,10 +54,10 @@ function fetchAndRenderMenuData(menuType) {
                 `
                 cartProducts.innerHTML += li
             }
-
             if (Object.keys(inCart).length) {
                 document.getElementById('cart-empty').style.display = 'none'
                 setCartProductsListeners()
+                getCartFromLocal()
             }
 
         })
@@ -225,8 +225,11 @@ document.querySelector('.single-product').onclick = (e) => {
             hideOverlay()
             setCartProductsListeners()
             inCart[id] = { ...allProductsData[id] }
+            sumPrice()
             saveCartToLocal()
+
         } else {
+            sumPrice()
             saveCartToLocal()
             hideOverlay()
         }
@@ -248,6 +251,7 @@ function setCartProductsListeners() {
                 allProductsData[id].qunt += 1
                 counter.textContent = allProductsData[id].qunt
                 cart_count.textContent = +cart_count.textContent + 1
+                sumPrice()
                 saveCartToLocal()
             }
             else if (minus) {
@@ -255,6 +259,7 @@ function setCartProductsListeners() {
                 allProductsData[id].qunt -= 1
                 counter.textContent = allProductsData[id].qunt
                 cart_count.textContent = +cart_count.textContent - 1
+                sumPrice()
                 saveCartToLocal()
             }
         }
@@ -264,11 +269,15 @@ function setCartProductsListeners() {
 function saveCartToLocal() {
     localStorage.setItem('cart', JSON.stringify(inCart))
     localStorage.setItem('items', JSON.stringify(cart_count.textContent))
+    localStorage.setItem('sum', JSON.stringify(document.getElementById('cart-total-price').textContent))
 }
 
 function getCartFromLocal() {
     if (JSON.parse(localStorage.getItem('items'))) {
         cart_count.textContent = JSON.parse(localStorage.getItem('items'))
+        document.getElementById('cart-total-price').textContent = JSON.parse(localStorage.getItem('sum'))
+        // document.getElementById('checkout-wrapper').style.display = 'block'
+        sumPrice()
     }
     return JSON.parse(localStorage.getItem('cart'))
 }
@@ -278,5 +287,16 @@ function sumPrice() {
     for (const key in inCart) {
         sum += inCart[key].price * inCart[key].qunt
     }
-    // cart_count.textContent = sum
+    document.getElementById('cart-total-price').textContent = sum + ' грн.'
+
+    if (parseInt(document.getElementById('cart-total-price').textContent) > 0) {
+        document.getElementById('checkout-wrapper').style.display = 'block'
+    } else {
+        document.getElementById('checkout-wrapper').style.display = 'none'
+    }
+    if (parseInt(document.getElementById('cart-total-price').textContent) >= 1000) {
+        document.getElementById('free-delivery').style.display = 'flex'
+    } else {
+        document.getElementById('free-delivery').style.display = 'none'
+    }
 }
