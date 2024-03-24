@@ -2,20 +2,26 @@ const navigation = document.querySelectorAll('nav a')
 let scrollBack = 0
 const local = 'http://localhost:3000/'
 const web = 'https://web-9p7n.onrender.com/'
-const cart = {}
 const allProductsData = {}
 const cart_count = document.getElementById('cart-count')
 const cartProducts = document.getElementById('cart-products')
-const inCart = {}
+let inCart = {}
 
 function fetchAndRenderMenuData(menuType) {
     fetch(`${local}get${menuType.slice(1)}`)
         .then(res => res.text())
         .then(d => {
             let arr = JSON.parse(d)
+            inCart = getCartFromLocal() || {}
             document.getElementById('menudata').innerHTML = arr.map(li => {
-                cart[li.id] = 1
-                allProductsData[li.id] = li
+                if (!allProductsData[li.id]) {
+                    allProductsData[li.id] = li
+                }
+                if (inCart && inCart[li.id]) {
+                    allProductsData[li.id].qunt = inCart[li.id].qunt
+                } else {
+                    allProductsData[li.id].qunt = 1
+                }
                 return `<li data-id='${li.id}'>
             <img src="${li.imgpath}" alt="">
             <p>${li.price}грн</p>
@@ -27,7 +33,32 @@ function fetchAndRenderMenuData(menuType) {
         })
         .catch(err => console.log(err))
         .finally(() => {
-            // console.log(cart);
+            cartProducts.innerHTML = ''
+            for (const key in inCart) {
+                if (!allProductsData[key]) {
+                    allProductsData[key] = { ...inCart[key] }
+                }
+                let li = `<li data-id='${inCart[key].id}'>
+                <img src="${inCart[key].imgpath}" alt="">
+                <section>
+                    <p>${inCart[key].title}</p>
+                    <p>${inCart[key].weight}</p>
+                    <p>${inCart[key].price}грн</p>
+                </section>
+                <div class="minus-plus">
+                    <button id="minus-${inCart[key].id}">-</button>
+                    <div id='cartProducts-${inCart[key].id}'>${inCart[key].qunt}</div>
+                    <button id="plus-${inCart[key].id}">+</button>
+                </div>
+                </li>
+                `
+                cartProducts.innerHTML += li
+            }
+            document.getElementById('cart-empty').style.display = 'none'
+            if (inCart) {
+                // console.log(allProductsData);
+                setCartProductsListeners()
+            }
         })
 }
 
@@ -99,7 +130,7 @@ document.querySelector('#menudata').onclick = (e) => {
         <button class="btn-darkorange add-to-cart-btn">Добавить</button>
         <div class="minus-plus">
             <button id="minus">-</button>
-            <div id='single-product-${id}'>${cart[product.id]}</div>
+            <div id='single-product-${id}'>${allProductsData[product.id].qunt}</div>
             <button id="plus">+</button>
         </div>
         <p>${product.price}грн</p>
@@ -146,32 +177,33 @@ document.querySelector('.single-product').onclick = (e) => {
     if (!btn && !plus && !minus) {
         return
     }
-
     if (plus) {
-        if (inCart[id]) {
-            cart[id] += 1
-            document.getElementById(`cartProducts-${id}`).textContent = cart[id]
-            counter.textContent = cart[id]
+        if (inCart && inCart[id]) {
+            inCart[id].qunt += 1
+            allProductsData[id].qunt += 1
+            document.getElementById(`cartProducts-${id}`).textContent = allProductsData[id].qunt
+            counter.textContent = allProductsData[id].qunt
         }
         else {
-            cart[id] += 1
-            counter.textContent = cart[id]
+            allProductsData[id].qunt += 1
+            counter.textContent = allProductsData[id].qunt
         }
         // cart_count.textContent = +cart_count.textContent + 1
     }
     if (minus) {
-        if (inCart[id]) {
-            cart[id] -= 1
-            document.getElementById(`cartProducts-${id}`).textContent = cart[id]
-            counter.textContent = cart[id]
+        if (inCart && inCart[id]) {
+            inCart[id].qunt -= 1
+            allProductsData[id].qunt -= 1
+            document.getElementById(`cartProducts-${id}`).textContent = allProductsData[id].qunt
+            counter.textContent = allProductsData[id].qunt
         } else {
-            cart[id] -= 1
-            counter.textContent = cart[id]
+            allProductsData[id].qunt -= 1
+            counter.textContent = allProductsData[id].qunt
         }
         // cart_count.textContent = +cart_count.textContent - 1
     }
     if (btn) {
-        if (inCart[id] == undefined) {
+        if (!inCart || inCart[id] == undefined) {
             let li = `<li data-id='${id}'>
         <img src="${allProductsData[id].imgpath}" alt="">
         <section>
@@ -180,9 +212,9 @@ document.querySelector('.single-product').onclick = (e) => {
             <p>${allProductsData[id].price}грн</p>
         </section>
         <div class="minus-plus">
-            <button id="aside-minus">-</button>
-            <div id='cartProducts-${id}'>${cart[id]}</div>
-            <button id="aside-plus">+</button>
+            <button id="minus-${id}">-</button>
+            <div id='cartProducts-${id}'>${allProductsData[id].qunt}</div>
+            <button id="plus-${id}">+</button>
         </div>
         </li>
         `
@@ -190,8 +222,10 @@ document.querySelector('.single-product').onclick = (e) => {
             document.getElementById('cart-empty').style.display = 'none'
             hideOverlay()
             setCartProductsListeners()
-            inCart[id] = allProductsData[id]
+            inCart[id] = { ...allProductsData[id] }
+            saveCartToLocal()
         } else {
+            saveCartToLocal()
             hideOverlay()
         }
     }
@@ -202,22 +236,31 @@ function setCartProductsListeners() {
         cartProducts.children[i].onclick = (e) => {
             let id = cartProducts.children[i].dataset.id
             let counter = document.getElementById('cartProducts-' + id)
-            let plus = e.target.closest('#aside-plus');
-            let minus = e.target.closest('#aside-minus');
+            let plus = e.target.closest('#plus-' + id)
+            let minus = e.target.closest('#minus-' + id)
             if (!plus && !minus) {
                 return
             }
             if (plus) {
-                cart[id] += 1
-                counter.textContent = cart[id]
+                inCart[id].qunt += 1
+                allProductsData[id].qunt += 1
+                counter.textContent = allProductsData[id].qunt
                 // cart_count.textContent = +cart_count.textContent + 1
             }
-            if (minus) {
-                cart[id] -= 1
-                counter.textContent = cart[id]
+            else if (minus) {
+                inCart[id].qunt -= 1
+                allProductsData[id].qunt -= 1
+                counter.textContent = allProductsData[id].qunt
                 // cart_count.textContent = +cart_count.textContent - 1
             }
         }
     }
 }
-setCartProductsListeners()
+
+function saveCartToLocal() {
+    localStorage.setItem('cart', JSON.stringify(inCart))
+}
+
+function getCartFromLocal() {
+    return JSON.parse(localStorage.getItem('cart'))
+}
