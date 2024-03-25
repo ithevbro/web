@@ -34,6 +34,7 @@ function fetchAndRenderMenuData(menuType) {
         })
         .catch(err => console.log(err))
         .finally(() => {
+            currentNav(menuType)
             cartProducts.innerHTML = ''
             for (const key in inCart) {
                 if (!allProductsData[key]) {
@@ -60,7 +61,6 @@ function fetchAndRenderMenuData(menuType) {
                 setCartProductsListeners()
                 getCartFromLocal()
             }
-
         })
 }
 
@@ -75,18 +75,26 @@ navigation.forEach(item => {
     });
 });
 
-function currentNav() {
+function currentNav(path) {
     let prev = null
+    if (path) {
+        navigation.forEach(item => {
+            if (item.getAttribute('href') == path) {
+                item.style.backgroundColor = '#FFAB08'
+                prev = item
+            }
+        })
+    }
     document.querySelector('nav').onclick = (e) => {
-        let li = e.target.closest('li')
-        if (!li) {
+        let a = e.target.closest('a')
+        if (!a) {
             return
         }
         if (prev) {
             prev.style.backgroundColor = ''
         }
-        li.style.backgroundColor = '#FFAB08'
-        prev = li
+        a.style.backgroundColor = '#FFAB08'
+        prev = a
     }
 }
 
@@ -258,7 +266,7 @@ function setCartProductsListeners() {
                 sumPrice()
                 saveCartToLocal()
             }
-            else if (minus) {
+            if (minus) {
                 if (parseInt(counter.textContent) < 2) {
                     return
                 }
@@ -300,7 +308,7 @@ function sumPrice() {
     } else {
         document.querySelector('.wrapper').style.display = 'none'
     }
-    if (parseInt(document.getElementById('cart-total-price').textContent) >= 1000) {
+    if (parseInt(document.getElementById('cart-total-price').textContent) >= 1500) {
         document.getElementById('free-delivery').style.display = 'flex'
     } else {
         document.getElementById('free-delivery').style.display = 'none'
@@ -308,12 +316,17 @@ function sumPrice() {
 }
 
 document.getElementById('hide-delivery').onclick = () => {
+    document.querySelector('.inner').style.overflow = 'hidden'
     document.querySelector('.wrapper').classList.remove('is-open')
     setTimeout(() => isHidden = true, 400)
 }
 document.querySelector('aside').onclick = () => {
     if (isHidden) {
         document.querySelector('.wrapper').classList.add('is-open')
-        setTimeout(() => isHidden = false, 400)
+        setTimeout(() => {
+            isHidden = false
+            document.querySelector('.inner').style.overflow = 'visible'
+        }, 400)
+
     }
 }

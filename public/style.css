@@ -10,9 +10,28 @@ img {
     display: block;
 }
 
+a {
+    text-decoration: unset;
+    color: black;
+    border-radius: 50px;
+    overflow: hidden;
+    background-color: #FFFFFF;
+    transition: background-color 0.2s;
+}
+
+a:hover {
+    background-color: #FFAB08;
+}
+
+a:active {
+    color: red;
+    text-decoration: underline;
+}
+
 button {
     border: 0;
     background-color: unset;
+    transition: background-color 0.2s;
 }
 
 button:hover {
@@ -85,16 +104,10 @@ header nav li {
     gap: 8px;
     height: 40px;
     padding: 8px 14px;
-    border-radius: 50px;
-    background-color: #FFFFFF;
     font-weight: 400;
     line-height: 21.82px;
     cursor: pointer;
     user-select: none;
-}
-
-header nav li:hover {
-    background-color: #FFAB08;
 }
 
 header nav ul {
@@ -565,16 +578,12 @@ label {
     transition: all 1s;
 }
 
-#cart-empty{
+#cart-empty {
     margin-top: 16px;
 }
 
 .wrapper.is-open {
     grid-template-rows: 1fr;
-}
-
-.inner {
-    overflow: hidden;
 }
 
 .wrapper {
