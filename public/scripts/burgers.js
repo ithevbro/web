@@ -9,7 +9,7 @@ let inCart = {}
 let isHidden = false
 
 function fetchAndRenderMenuData(menuType) {
-    fetch(`${web}get${menuType.slice(1)}`)
+    fetch(`${local}get${menuType.slice(1)}`)
         .then(res => res.text())
         .then(d => {
             let arr = JSON.parse(d)
@@ -82,6 +82,8 @@ function currentNav(path) {
             if (item.getAttribute('href') == path) {
                 item.style.backgroundColor = '#FFAB08'
                 prev = item
+            } else {
+                item.style.backgroundColor = ''
             }
         })
     }
@@ -101,7 +103,11 @@ function currentNav(path) {
 currentNav()
 
 window.addEventListener('popstate', function (event) {
-    fetchAndRenderMenuData(event.state.path);
+    if (event.state && event.state.path != null) {
+        fetchAndRenderMenuData(event.state.path);
+    } else {
+        fetchAndRenderMenuData('/');
+    }
 });
 
 document.getElementById('close-overlay').onclick = () => {
