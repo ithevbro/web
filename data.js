@@ -18,7 +18,37 @@ let arr = [
         description: 'blablablaba',
         ingredients: 'huyna',
         calories: 330
-    }
+    },
+    {
+        id: 123132,
+        imgpath: './images/gavno.jpg',
+        price: 500,
+        title: 'Мясная бомба',
+        weight: '520г',
+        description: 'blablablaba',
+        ingredients: 'huyna',
+        calories: 330
+    },
+    {
+        id: 112333132,
+        imgpath: './images/gavno.jpg',
+        price: 500,
+        title: 'Мясная бомба',
+        weight: '520г',
+        description: 'blablablaba',
+        ingredients: 'huyna',
+        calories: 330
+    },
+    {
+        id: 3132,
+        imgpath: './images/gavno.jpg',
+        price: 500,
+        title: 'Мясная бомба',
+        weight: '520г',
+        description: 'blablablaba',
+        ingredients: 'huyna',
+        calories: 330
+    },
 ]
 
 let arr2 = [

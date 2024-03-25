@@ -32,9 +32,6 @@ button {
     border: 0;
     background-color: unset;
     transition: background-color 0.2s;
-}
-
-button:hover {
     cursor: pointer;
 }
 
@@ -119,7 +116,7 @@ header nav ul {
 
 aside {
     align-self: flex-start;
-    width: 300px;
+    min-width: 300px;
     padding: 24px 16px;
     background-color: #FFFFFF;
     border-radius: 18px;
@@ -128,7 +125,7 @@ aside {
 .cart {
     display: flex;
     align-items: center;
-    gap: 129px;
+    justify-content: space-between;
 }
 
 h3 {
@@ -141,7 +138,6 @@ h3 {
     font-size: 12px;
     border-radius: 6px;
     padding: 2px 17px;
-    text-align: center;
 }
 
 main {
