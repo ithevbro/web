@@ -15,6 +15,10 @@ button {
     background-color: unset;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 body {
     background-color: #F9F9F9;
     max-width: 1442px;
@@ -101,18 +105,17 @@ header nav ul {
 }
 
 aside {
+    align-self: flex-start;
     width: 300px;
     padding: 24px 16px;
     background-color: #FFFFFF;
     border-radius: 18px;
-    height: max-content;
 }
 
 .cart {
     display: flex;
     align-items: center;
     gap: 129px;
-    margin-bottom: 16px;
 }
 
 h3 {
@@ -195,7 +198,6 @@ section ul li button:active {
 
 section ul li button:hover {
     background-color: #FFAB08;
-    cursor: pointer;
     color: white;
 }
 
@@ -330,6 +332,7 @@ aside ul li section p:nth-child(2) {
     padding-top: 8px;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 }
 
 #overlay {
@@ -553,10 +556,30 @@ label {
     margin-left: auto;
 }
 
-#checkout-wrapper {
+#free-delivery {
     display: none;
 }
 
-#free-delivery {
+#cart-products {
+    margin-top: 16px;
+    transition: all 1s;
+}
+
+#cart-empty{
+    margin-top: 16px;
+}
+
+.wrapper.is-open {
+    grid-template-rows: 1fr;
+}
+
+.inner {
+    overflow: hidden;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s;
     display: none;
 }

@@ -76,34 +76,39 @@
     <main>
         <h2 id="type-of-products">Бургеры</h2>
         <div class="main-container">
-            <aside>
+            <aside id="gandon">
                 <div class="cart">
                     <h3>Корзина</h3>
                     <p id="cart-count">0</p>
                 </div>
                 <p id="cart-empty">Тут пока пусто :(</p>
-                <ul id="cart-products">
-                    <!-- <li>
-                        <img src="./images/gavno.jpg" alt="">
-                        <section>
-                            <p>Супер сырный</p>
-                            <p>512г</p>
-                            <p>550грн</p>
-                        </section>
-                        <div class="minus-plus">
-                            <button>-</button>
-                            <div>1</div>
-                            <button>+</button>
-                        </div>
-                    </li> -->
-                </ul>
+                <div class="wrapper is-open">
+                    <div class="inner">
+                        <ul id="cart-products">
+                            <!-- <li>
+                            <img src="./images/gavno.jpg" alt="">
+                            <section>
+                                <p>Супер сырный</p>
+                                <p>512г</p>
+                                <p>550грн</p>
+                            </section>
+                            <div class="minus-plus">
+                                <button>-</button>
+                                <div>1</div>
+                                <button>+</button>
+                            </div>
+                        </li> -->
+                        </ul>
 
-                <div id="checkout-wrapper">
-                    <div id="checkout"><span>Итого</span> <span id="cart-total-price">0</span></div>
-                    <button id="makeorder" class="btn-darkorange">Оформить заказ</button>
-                    <div class="delivery">
-                        <div id="free-delivery"><img src="./images/delivery.png" alt="">Бесплатная доставка</div>
-                        <button id="hide-delivery">Свернуть</button>
+                        <div id="checkout-wrapper">
+                            <div id="checkout"><span>Итого</span> <span id="cart-total-price">0</span></div>
+                            <button id="makeorder" class="btn-darkorange">Оформить заказ</button>
+                            <div class="delivery">
+                                <div id="free-delivery"><img src="./images/delivery.png" alt="">Бесплатная доставка
+                                </div>
+                                <button id="hide-delivery">Свернуть</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </aside>

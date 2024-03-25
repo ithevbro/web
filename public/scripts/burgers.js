@@ -6,9 +6,10 @@ const allProductsData = {}
 const cart_count = document.getElementById('cart-count')
 const cartProducts = document.getElementById('cart-products')
 let inCart = {}
+let isHidden = false
 
 function fetchAndRenderMenuData(menuType) {
-    fetch(`${local}get${menuType.slice(1)}`)
+    fetch(`${web}get${menuType.slice(1)}`)
         .then(res => res.text())
         .then(d => {
             let arr = JSON.parse(d)
@@ -192,6 +193,9 @@ document.querySelector('.single-product').onclick = (e) => {
         }
     }
     if (minus) {
+        if (parseInt(counter.textContent) < 2) {
+            return
+        }
         if (inCart && inCart[id]) {
             inCart[id].qunt -= 1
             allProductsData[id].qunt -= 1
@@ -255,6 +259,9 @@ function setCartProductsListeners() {
                 saveCartToLocal()
             }
             else if (minus) {
+                if (parseInt(counter.textContent) < 2) {
+                    return
+                }
                 inCart[id].qunt -= 1
                 allProductsData[id].qunt -= 1
                 counter.textContent = allProductsData[id].qunt
@@ -276,7 +283,6 @@ function getCartFromLocal() {
     if (JSON.parse(localStorage.getItem('items'))) {
         cart_count.textContent = JSON.parse(localStorage.getItem('items'))
         document.getElementById('cart-total-price').textContent = JSON.parse(localStorage.getItem('sum'))
-        // document.getElementById('checkout-wrapper').style.display = 'block'
         sumPrice()
     }
     return JSON.parse(localStorage.getItem('cart'))
@@ -290,13 +296,24 @@ function sumPrice() {
     document.getElementById('cart-total-price').textContent = sum + ' грн.'
 
     if (parseInt(document.getElementById('cart-total-price').textContent) > 0) {
-        document.getElementById('checkout-wrapper').style.display = 'block'
+        document.querySelector('.wrapper').style.display = 'grid'
     } else {
-        document.getElementById('checkout-wrapper').style.display = 'none'
+        document.querySelector('.wrapper').style.display = 'none'
     }
     if (parseInt(document.getElementById('cart-total-price').textContent) >= 1000) {
         document.getElementById('free-delivery').style.display = 'flex'
     } else {
         document.getElementById('free-delivery').style.display = 'none'
+    }
+}
+
+document.getElementById('hide-delivery').onclick = () => {
+    document.querySelector('.wrapper').classList.remove('is-open')
+    setTimeout(() => isHidden = true, 400)
+}
+document.querySelector('aside').onclick = () => {
+    if (isHidden) {
+        document.querySelector('.wrapper').classList.add('is-open')
+        setTimeout(() => isHidden = false, 400)
     }
 }
