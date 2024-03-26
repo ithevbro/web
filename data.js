@@ -1,7 +1,7 @@
 let arr = [
     {
         id: 1,
-        imgpath: './images/gavno.jpg',
+        imgpath: './images/gavno.png',
         price: 600,
         title: 'Мясная бомба',
         weight: '520г',
@@ -11,7 +11,7 @@ let arr = [
     },
     {
         id: 2,
-        imgpath: './images/gavno.jpg',
+        imgpath: './images/gavno.png',
         price: 500,
         title: 'Мясная бомба',
         weight: '520г',
@@ -21,7 +21,7 @@ let arr = [
     },
     {
         id: 123132,
-        imgpath: './images/gavno.jpg',
+        imgpath: './images/gavno.png',
         price: 500,
         title: 'Мясная бомба',
         weight: '520г',
@@ -31,7 +31,7 @@ let arr = [
     },
     {
         id: 112333132,
-        imgpath: './images/gavno.jpg',
+        imgpath: './images/gavno.png',
         price: 500,
         title: 'Мясная бомба',
         weight: '520г',
@@ -41,7 +41,7 @@ let arr = [
     },
     {
         id: 3132,
-        imgpath: './images/gavno.jpg',
+        imgpath: './images/gavno.png',
         price: 500,
         title: 'Мясная бомба',
         weight: '520г',

@@ -5,6 +5,10 @@
     font-family: "Nunito", sans-serif;
 }
 
+:root {
+    --main-padding: 0 75px;
+}
+
 img {
     max-width: 100%;
     display: block;
@@ -17,10 +21,12 @@ a {
     overflow: hidden;
     background-color: #FFFFFF;
     transition: background-color 0.2s;
+    transition: border-color 0.2s;
+    border: 2px solid #F9F9F9;
 }
 
 a:hover {
-    background-color: #FFAB08;
+    border: 2px solid #FFAB08;
 }
 
 a:active {
@@ -37,14 +43,12 @@ button {
 
 body {
     background-color: #F9F9F9;
-    max-width: 1442px;
     margin: 0 auto;
     font-weight: 400;
     /* display: flex;
     flex-direction: column;
     min-height: 100vh; */
-    border-left: 1px solid #F2F2F3;
-    border-right: 1px solid #F2F2F3;
+    /* max-width: 1440px; */
 }
 
 header section {
@@ -92,7 +96,8 @@ ul {
 }
 
 header nav {
-    margin: 40px 70px 50px;
+    margin: 40px 0 50px 0;
+    padding: var(--main-padding);
 }
 
 header nav li {
@@ -116,10 +121,11 @@ header nav ul {
 
 aside {
     align-self: flex-start;
-    min-width: 300px;
     padding: 24px 16px;
     background-color: #FFFFFF;
     border-radius: 18px;
+    margin-top: 72px;
+    min-width: 300px;
 }
 
 .cart {
@@ -142,37 +148,38 @@ h3 {
 
 main {
     display: flex;
-    gap: 24px;
-    flex-direction: column;
-    margin-left: 75px;
+    gap: 30px;
     /* flex-grow: 1; */
+    position: relative;
+    padding: var(--main-padding);
 }
 
 #type-of-products {
     font-size: 40px;
-    margin-left: 330px;
+    line-height: 48px;
+    margin-bottom: 24px;
+}
+
+main section {
+    width: 100%;
 }
 
 section ul {
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
-}
-
-.main-container {
-    display: flex;
-    gap: 30px;
+    /* grid-template-columns: 1fr 1fr 1fr; */
 }
 
 section ul li {
     padding: 12px;
     border-radius: 18px;
     background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
 }
 
 section ul li img {
-    width: 276px;
-    height: 220px;
     border-radius: 12px;
     margin-bottom: 16px;
 }
@@ -194,10 +201,9 @@ section ul li p:nth-child(4) {
 }
 
 section ul li button {
-    padding: 11px 92px;
+    padding: 11px 0px;
     border-radius: 12px;
     background-color: #F2F2F3;
-    width: 100%;
 }
 
 section ul li button:active {
@@ -213,23 +219,21 @@ section ul li button:hover {
 footer {
     margin-top: 100px;
     background-color: #FFFFFF;
-    padding: 45px 75px;
+    padding: var(--main-padding);
+    padding-top: 50px;
+    padding-bottom: 40px;
     display: flex;
     justify-content: space-between;
-    gap: 25px;
-}
-
-footer div:nth-child(1) {
-    flex: 3;
+    gap: 30px;
 }
 
 footer div:nth-child(2) {
-    flex: 1;
+    margin-left: auto;
 }
 
-footer div:nth-child(3) {
-    flex: 1;
-}
+/* footer>* {
+    width: 300px;
+} */
 
 
 footer h3 {
@@ -583,8 +587,61 @@ label {
 }
 
 .wrapper {
+    grid-template-columns: 1fr;
     display: grid;
     grid-template-rows: 0fr;
     transition: grid-template-rows 0.4s;
     display: none;
+}
+
+
+@media (min-width:769px) {
+    section ul li {
+        width: calc(50% - 30px /2);
+    }
+
+    :root {
+        --main-padding: 0 32px;
+    }
+
+}
+
+@media (min-width:1025px) {
+    section ul li {
+        width: calc(33.3333% - (30px*2) /3);
+    }
+
+    :root {
+        --main-padding: 0 75px;
+    }
+}
+
+@media (min-width:1441px) {
+    section ul li {
+        width: calc(25% - (30px*3) /4);
+    }
+
+    header nav ul {
+        justify-content: center;
+    }
+}
+
+
+@media (max-width:769px) {
+    section ul li {
+        width: calc(25% - (20px*3) /4);
+    }
+
+    section ul {
+        gap: 20px;
+    }
+
+    aside {
+        position: absolute;
+        margin-top: 0;
+    }
+
+    main {
+        padding: 0 32px;
+    }
 }
