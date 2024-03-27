@@ -1,7 +1,7 @@
 const navigation = document.querySelectorAll('nav a')
 let scrollBack = 0
 const local = 'http://localhost:3000/'
-const web = 'https://web-9p7n.onrender.com/'
+const web = 'https://your-meal.onrender.com'
 const allProductsData = {}
 const cart_count = document.getElementById('cart-count')
 const cartProducts = document.getElementById('cart-products')
