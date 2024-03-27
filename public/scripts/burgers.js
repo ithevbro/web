@@ -1,7 +1,7 @@
 const navigation = document.querySelectorAll('nav a')
 let scrollBack = 0
 const local = 'http://localhost:3000/'
-const web = 'https://your-meal.onrender.com'
+const web = 'https://your-meal.onrender.com/'
 const allProductsData = {}
 const cart_count = document.getElementById('cart-count')
 const cartProducts = document.getElementById('cart-products')
@@ -9,7 +9,7 @@ let inCart = {}
 let isHidden = false
 
 function fetchAndRenderMenuData(menuType) {
-    fetch(`${web}get${menuType.slice(1)}`)
+    fetch(`${local}get${menuType.slice(1)}`)
         .then(res => res.text())
         .then(d => {
             let arr = JSON.parse(d)
@@ -127,7 +127,7 @@ document.querySelector('#menudata').onclick = (e) => {
     div.innerHTML = `
     <h2>${product.title}</h2>
     <figure>
-        <img src="${product.imgpath}" alt="">
+    <div class="prod-img-wrap"><img src="${product.imgpath}" alt=""></div>
         <figcaption>
             <p>${product.description}</p>
             <dl>

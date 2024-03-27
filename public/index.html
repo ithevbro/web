@@ -17,7 +17,7 @@
         <section>
             <img id="header-logo" src="./images/logo-header.svg" alt="">
             <figure>
-                <img id="burger-logo" src="./images/burger.svg" alt="burger image">
+                <div id="burger-logo"></div>
                 <figcaption>
                     <h1>Только самые<br><span>сочные бургеры!</span></h1>
                     <p>Бесплатная доставка от 599грн</p>
@@ -85,61 +85,65 @@
         </nav>
     </header>
 
-    <main>
-        <aside id="gandon">
-            <div class="cart">
-                <h3>Корзина</h3>
-                <p id="cart-count">0</p>
-            </div>
-            <p id="cart-empty">Тут пока пусто :(</p>
-            <div class="wrapper is-open">
-                <div class="inner">
-                    <ul id="cart-products">
-                        <!-- <li>
-                        <img src="./images/gavno.jpg" alt="">
-                        <section>
-                            <p>Супер сырный</p>
-                            <p>512г</p>
-                            <p>550грн</p>
-                        </section>
-                        <div class="minus-plus">
-                            <button>-</button>
-                            <div>1</div>
-                            <button>+</button>
-                        </div>
-                    </li> -->
-                    </ul>
-
-                    <div id="checkout-wrapper">
-                        <div id="checkout"><span>Итого</span> <span id="cart-total-price">0</span></div>
-                        <button id="makeorder" class="btn-darkorange">Оформить заказ</button>
-                        <div class="delivery">
-                            <div id="free-delivery"><img src="./images/delivery.png" alt="">Бесплатная доставка
+    <div class="main-wrapper">
+        <main>
+            <aside id="gandon">
+                <div class="cart">
+                    <h3>Корзина</h3>
+                    <p id="cart-count">0</p>
+                </div>
+                <p id="cart-empty">Тут пока пусто :(</p>
+                <div class="wrapper is-open">
+                    <div class="inner">
+                        <ul id="cart-products">
+                            <!-- <li>
+                            <img src="./images/gavno.jpg" alt="">
+                            <section>
+                                <p>Супер сырный</p>
+                                <p>512г</p>
+                                <p>550грн</p>
+                            </section>
+                            <div class="minus-plus">
+                                <button>-</button>
+                                <div>1</div>
+                                <button>+</button>
                             </div>
-                            <button id="hide-delivery">Свернуть</button>
+                        </li> -->
+                        </ul>
+
+                        <div id="checkout-wrapper">
+                            <div id="checkout"><span>Итого</span> <span id="cart-total-price">0</span></div>
+                            <button id="makeorder" class="btn-darkorange">Оформить заказ</button>
+                            <div class="delivery">
+                                <div id="free-delivery"><img src="./images/delivery.png" alt="">Бесплатная доставка
+                                </div>
+                                <button id="hide-delivery">Свернуть</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </aside>
-        <section>
-            <h2 id="type-of-products">Бургеры</h2>
-            <ul id="menudata"></ul>
-        </section>
-    </main>
+            </aside>
+            <section>
+                <h2 id="type-of-products">Бургеры</h2>
+                <ul id="menudata"></ul>
+            </section>
+        </main>
 
+    </div>
     <footer>
-        <img src="./images/footer-icon.svg" alt="">
+        <div><img src="./images/footer-icon.png" alt=""></div>
         <div>
-            <h3>Номер для заказа</h3>
-            <p class="zakaz"><img src="./images/footer-icons/Call.png" alt=""><a
-                    href="+380631111111">+7(930)833-38-11</a></p>
-        </div>
-        <div>
-            <h3>Мы в соцсетях</h3>
-            <div class="socials">
-                <img src="./images/footer-icons/vk.png" alt="">
-                <img src="./images/footer-icons/tg.png" alt="">
+            <div>
+                <h3>Номер для заказа</h3>
+                <a href="+380631111111" class="foot-img phone"><img src="./images/footer-icons/Call.png" alt="">
+                    +7(930)833-38-11</a>
+            </div>
+            <div>
+                <h3>Мы в соцсетях</h3>
+                <div class="socials foot-img">
+                    <img src="./images/footer-icons/vk.png" alt="">
+                    <img src="./images/footer-icons/tg.png" alt="">
+                </div>
             </div>
         </div>
     </footer>
@@ -151,22 +155,24 @@
                     <img src="./images/modal-logo.svg" alt="">
                 </div>
                 <form>
-                    <h3>Доставка</h3>
-                    <input type="text" placeholder="Ваше имя">
-                    <input type="text" placeholder="Телефон">
-                    <div class="radio-btns">
-                        <label for="samoviviz"><input checked type="radio" name="deliver"
-                                id="samoviviz">Самовывоз</label>
-                        <label for="dostavka"><input type="radio" name="deliver" id="dostavka">Доставка</label>
-                    </div>
-                    <div id="delivery-address">
-                        <input type="text" placeholder="Улица, дом, квартира">
-                        <div>
-                            <input type="text" placeholder="Этаж">
-                            <input type="text" placeholder="Домофон">
+                    <div class="form-wrapper">
+                        <h3>Доставка</h3>
+                        <input type="text" placeholder="Ваше имя">
+                        <input type="text" placeholder="Телефон">
+                        <div class="radio-btns">
+                            <label for="samoviviz"><input checked type="radio" name="deliver"
+                                    id="samoviviz">Самовывоз</label>
+                            <label for="dostavka"><input type="radio" name="deliver" id="dostavka">Доставка</label>
                         </div>
+                        <div id="delivery-address">
+                            <input type="text" placeholder="Улица, дом, квартира">
+                            <div>
+                                <input type="text" placeholder="Этаж">
+                                <input type="text" placeholder="Домофон">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-darkorange">Оформить</button>
                     </div>
-                    <button class="btn-darkorange">Оформить</button>
                 </form>
             </div>
             <div class="single-product">
