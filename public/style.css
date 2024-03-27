@@ -657,6 +657,9 @@ label {
     header section {
         background-image: url(./images/header-bg-2540.svg);
         max-height: 349px;
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: auto;
     }
 
     header nav {
@@ -811,17 +814,21 @@ label {
     header section {
         background-image: url(./images/header-bg-600.svg);
         max-height: 459px;
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: auto;
     }
 
     :root {
         --fs-50: 30px;
         --line-height-60px: 36px;
     }
+
     header figure figcaption p {
         margin-top: 16px;
     }
 
-    header figure figcaption h1{
+    header figure figcaption h1 {
         margin-top: 24px;
     }
 
