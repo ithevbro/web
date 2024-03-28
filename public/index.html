@@ -26,61 +26,63 @@
         </section>
         <nav>
             <ul>
-                <a href="/">
-                    <li>
-                        <img src="./images/nav-icons/Бургеры.png" alt="">
-                        <span>Бургеры</span>
-                    </li>
-                </a>
-                <a href="/zakuski">
-                    <li>
-                        <img src="./images/nav-icons/Закуски.png" alt="">
-                        <span>Закуски</span>
-                    </li>
-                </a>
-                <a href="/hotdogs">
-                    <li>
-                        <img src="./images/nav-icons/Хот-доги.png" alt="">
-                        <span>Хот-доги</span>
+                <div id="nav-li-wrap">
+                    <a href="/">
+                        <li>
+                            <img src="./images/nav-icons/Бургеры.png" alt="">
+                            <span>Бургеры</span>
+                        </li>
+                    </a>
+                    <a href="/zakuski">
+                        <li>
+                            <img src="./images/nav-icons/Закуски.png" alt="">
+                            <span>Закуски</span>
+                        </li>
+                    </a>
+                    <a href="/hotdogs">
+                        <li>
+                            <img src="./images/nav-icons/Хот-доги.png" alt="">
+                            <span>Хот-доги</span>
 
-                    </li>
-                </a>
-                <a href="/kombo">
-                    <li>
-                        <img src="./images/nav-icons/Комбо.png" alt="">
-                        <p>Комбо</p>
-                    </li>
-                </a>
-                <a href="/shaurma">
-                    <li>
-                        <img src="./images/nav-icons/Шаурма.png" alt="">
-                        <p>Шаурма</p>
-                    </li>
-                </a>
-                <a href="/pizza">
-                    <li>
-                        <img src="./images/nav-icons/Пицца.png" alt="">
-                        <p>Пицца</p>
-                    </li>
-                </a>
-                <a href="/vok">
-                    <li>
-                        <img src="./images/nav-icons/Вок.png" alt="">
-                        <p>Вок</p>
-                    </li>
-                </a>
-                <a href="/deserts">
-                    <li>
-                        <img src="./images/nav-icons/Десерты.png" alt="">
-                        <p>Десерты</p>
-                    </li>
-                </a>
-                <a href="/sauces">
-                    <li>
-                        <img src="./images/nav-icons/Соусы.png" alt="">
-                        <p>Соусы</p>
-                    </li>
-                </a>
+                        </li>
+                    </a>
+                    <a href="/kombo">
+                        <li>
+                            <img src="./images/nav-icons/Комбо.png" alt="">
+                            <p>Комбо</p>
+                        </li>
+                    </a>
+                    <a href="/shaurma">
+                        <li>
+                            <img src="./images/nav-icons/Шаурма.png" alt="">
+                            <p>Шаурма</p>
+                        </li>
+                    </a>
+                    <a href="/pizza">
+                        <li>
+                            <img src="./images/nav-icons/Пицца.png" alt="">
+                            <p>Пицца</p>
+                        </li>
+                    </a>
+                    <a href="/vok">
+                        <li>
+                            <img src="./images/nav-icons/Вок.png" alt="">
+                            <p>Вок</p>
+                        </li>
+                    </a>
+                    <a href="/deserts">
+                        <li>
+                            <img src="./images/nav-icons/Десерты.png" alt="">
+                            <p>Десерты</p>
+                        </li>
+                    </a>
+                    <a href="/sauces">
+                        <li>
+                            <img src="./images/nav-icons/Соусы.png" alt="">
+                            <p>Соусы</p>
+                        </li>
+                    </a>
+                </div>
             </ul>
         </nav>
     </header>
@@ -95,22 +97,7 @@
                 <p id="cart-empty">Тут пока пусто :(</p>
                 <div class="wrapper is-open">
                     <div class="inner">
-                        <ul id="cart-products">
-                            <!-- <li>
-                            <img src="./images/gavno.jpg" alt="">
-                            <section>
-                                <p>Супер сырный</p>
-                                <p>512г</p>
-                                <p>550грн</p>
-                            </section>
-                            <div class="minus-plus">
-                                <button>-</button>
-                                <div>1</div>
-                                <button>+</button>
-                            </div>
-                        </li> -->
-                        </ul>
-
+                        <ul id="cart-products"></ul>
                         <div id="checkout-wrapper">
                             <div id="checkout"><span>Итого</span> <span id="cart-total-price">0</span></div>
                             <button id="makeorder" class="btn-darkorange">Оформить заказ</button>
@@ -175,37 +162,7 @@
                     </div>
                 </form>
             </div>
-            <div class="single-product">
-                <!-- <div>
-                    <h2>мясная бомба</h2>
-                    <figure>
-                        <img src="./images/gavno.jpg" alt="">
-                        <figcaption>
-                            <p>Супер мясное наслаждение! Большая рубленая котлета из свежего говяжего мяса покорит вас
-                                своей сочностью, а хрустящие листья салата добавят свежести.</p>
-                            <dl>
-                                <dt>Состав:</dt>
-                                <dd>Пшеничная булочка</dd>
-                                <dd>Котлета из говядины</dd>
-                                <dd>Красный лук</dd>
-                                <dd>Листья салата</dd>
-                                <dd>Соус горчичный</dd>
-                            </dl>
-                            <span>520г, ккал 430</span>
-                        </figcaption>
-                    </figure>
-
-                    <div class="single-product-btns">
-                        <button class="btn-darkorange">Добавить</button>
-                        <div class="minus-plus">
-                            <button>-</button>
-                            <div>1</div>
-                            <button>+</button>
-                        </div>
-                        <p>600</p>
-                    </div>
-                </div> -->
-            </div>
+            <div class="single-product"></div>
             <span id="close-overlay"></span>
         </div>
     </div>

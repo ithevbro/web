@@ -5,7 +5,6 @@
     font-family: "Nunito", sans-serif;
 }
 
-
 :root {
     --main-padding: 0 75px;
     --line-height-60px: 60px;
@@ -39,6 +38,7 @@ a {
     transition: border-color 0.2s;
     border: 2px solid #F9F9F9;
     flex-shrink: 0;
+    user-select: none;
 }
 
 a:hover {
@@ -134,10 +134,14 @@ header nav li {
 }
 
 header nav ul {
+    overflow: hidden;
+    user-select: none;
+}
+
+#nav-li-wrap {
     display: flex;
     align-items: center;
     gap: 24px;
-    overflow: hidden;
 }
 
 aside {
@@ -647,8 +651,7 @@ label {
     #menudata li {
         width: calc(25% - (30px*3) /4);
     }
-
-    header nav ul {
+    #nav-li-wrap{
         justify-content: center;
     }
 }
@@ -662,7 +665,7 @@ label {
         background-size: auto;
     }
 
-    header nav ul{
+    #nav-li-wrap {
         gap: 12px;
     }
 
@@ -812,7 +815,7 @@ label {
     .single-product-btns {
         margin-top: 24px;
     }
-    
+
 }
 
 @media (max-width:600px) {
@@ -821,7 +824,7 @@ label {
         max-height: 459px;
     }
 
-    header nav ul{
+    #nav-li-wrap {
         gap: 8px;
     }
 
@@ -886,26 +889,28 @@ label {
     .single-product h2 {
         line-height: 33.6px;
     }
-    .prod-img-wrap{
+
+    .prod-img-wrap {
         height: 100%;
         max-height: 232px;
         width: 100%;
     }
 
-    .single-product-btns{
+    .single-product-btns {
         margin-top: auto;
     }
-    #product-wrapper{
+
+    #product-wrapper {
         height: 100%;
         display: flex;
         flex-direction: column;
     }
-    .form-wrapper{
+
+    .form-wrapper {
         max-width: 100%;
     }
 
-    #close-overlay{
+    #close-overlay {
         margin-right: 16px;
     }
 }
-    

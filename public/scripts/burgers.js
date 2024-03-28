@@ -7,9 +7,15 @@ const cart_count = document.getElementById('cart-count')
 const cartProducts = document.getElementById('cart-products')
 let inCart = {}
 let isHidden = false
+let div = document.getElementById('nav-li-wrap')
+let clicked = false
+let x = 0
+let moveX = 0
+let list = div.children
+let tag = null
 
 function fetchAndRenderMenuData(menuType) {
-    fetch(`${local}get${menuType.slice(1)}`)
+    fetch(`${web}get${menuType.slice(1)}`)
         .then(res => res.text())
         .then(d => {
             let arr = JSON.parse(d)
@@ -326,6 +332,7 @@ document.getElementById('hide-delivery').onclick = () => {
     document.querySelector('.wrapper').classList.remove('is-open')
     setTimeout(() => isHidden = true, 400)
 }
+
 document.querySelector('aside').onclick = () => {
     if (isHidden) {
         document.querySelector('.wrapper').classList.add('is-open')
@@ -336,3 +343,77 @@ document.querySelector('aside').onclick = () => {
 
     }
 }
+
+div.onmousedown = e => {
+    if (lengthOfNav() + countGap() + getPudding() > window.innerWidth - getPudding()) {
+        div.style.transition = ''
+        clicked = true
+        x = e.clientX - moveX
+        for (let i = 0; i < list.length; i++) {
+            list[i].ondragstart = function () {
+                list[i].onclick = () => {
+                    tag = list[i]
+                    return false
+                }
+                return false;
+            };
+        }
+    }
+    else {
+        return
+    }
+}
+
+document.onmousemove = e => {
+    if (clicked) {
+        moveX = e.clientX - x
+        div.style.transform = `translateX(${moveX}px)`
+    }
+}
+
+document.onmouseup = () => {
+    if (!clicked) {
+        return
+    }
+    clicked = false
+    setTimeout(() => { if (tag) tag.onclick = () => true })
+    let first = list[0].getBoundingClientRect().left
+    if (first > 0) {
+        div.style.transition = 'all 0.4s'
+        div.style.transform = 'translateX(0px)'
+        moveX = 0
+    }
+
+    let last = lastElemetDistance()
+    if (moveX < -last) {
+        div.style.transition = 'all 0.4s'
+        div.style.transform = `translateX(${-last}px)`
+        moveX = -last
+    }
+}
+
+function countGap() {
+    let computedStyle = window.getComputedStyle(document.getElementById('nav-li-wrap'));
+    return parseInt(computedStyle.getPropertyValue('gap')) * (list.length - 1)
+}
+
+function lengthOfNav() {
+    let sumWidth = 0
+    for (let i = 0; i < list.length; i++) {
+        sumWidth += list[i].offsetWidth
+    }
+    return sumWidth
+}
+
+console.log(countGap());
+function lastElemetDistance() {
+    return lengthOfNav() + countGap() - window.innerWidth + getPudding()
+}
+
+function getPudding() {
+    let computedStyle = window.getComputedStyle(document.querySelector('nav'));
+    return parseInt(computedStyle.getPropertyValue("padding-right")) * 2
+}
+
+
+
