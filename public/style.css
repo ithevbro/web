@@ -689,7 +689,7 @@ label {
     }
 
     #burger-logo {
-        background-image: url(./images/burger-small.svg);
+        background-image: url(./images/pic.png);
         width: 227px;
         Height: 229px;
     }
@@ -814,14 +814,12 @@ label {
     header section {
         background-image: url(./images/header-bg-600.svg);
         max-height: 459px;
-        background-position: bottom;
-        background-repeat: no-repeat;
-        background-size: auto;
     }
 
     :root {
         --fs-50: 30px;
         --line-height-60px: 36px;
+        --main-padding: 0 10px;
     }
 
     header figure figcaption p {
@@ -860,4 +858,41 @@ label {
     .main-wrapper {
         padding: 0 10px;
     }
+
+    .single-product figure {
+        flex-direction: column;
+        margin-top: 12px;
+    }
+
+    .overlay-control {
+        height: 100%;
+        width: 100%;
+        border-radius: 0px;
+    }
+
+    .single-product {
+        padding: 32px 10px;
+    }
+
+    .single-product h2 {
+        line-height: 33.6px;
+    }
+    .prod-img-wrap{
+        height: 100%;
+        max-height: 232px;
+        width: 100%;
+    }
+
+    .single-product-btns{
+        margin-top: auto;
+    }
+    #product-wrapper{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .form-wrapper{
+        max-width: 100%;
+    }
 }
+    
