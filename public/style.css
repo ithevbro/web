@@ -79,12 +79,10 @@ header section {
 
 #header-logo {
     margin: 0 auto;
-    width: 150px;
-    height: 29px;
 }
 
 #burger-logo {
-    background-image: url(./images/burger-large.svg);
+    background-image: url(./images/burger-header.png);
     width: 326px;
     height: 326px;
     background-repeat: no-repeat;
@@ -478,7 +476,8 @@ input[type=radio] {
     height: 24px;
     width: 24px;
     top: 24px;
-    left: 93.5%;
+    right: 0;
+    margin-right: 24px;
 }
 
 #close-overlay::before,
@@ -519,6 +518,7 @@ input[type=radio] {
     display: flex;
     gap: 8px;
     flex-direction: column;
+    width: 100%;
 }
 
 #delivery-address {
@@ -660,6 +660,10 @@ label {
         background-position: bottom;
         background-repeat: no-repeat;
         background-size: auto;
+    }
+
+    header nav ul{
+        gap: 12px;
     }
 
     header nav {
@@ -808,12 +812,17 @@ label {
     .single-product-btns {
         margin-top: 24px;
     }
+    
 }
 
 @media (max-width:600px) {
     header section {
         background-image: url(./images/header-bg-600.svg);
         max-height: 459px;
+    }
+
+    header nav ul{
+        gap: 8px;
     }
 
     :root {
@@ -893,6 +902,10 @@ label {
     }
     .form-wrapper{
         max-width: 100%;
+    }
+
+    #close-overlay{
+        margin-right: 16px;
     }
 }
     

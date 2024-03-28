@@ -9,7 +9,7 @@ let inCart = {}
 let isHidden = false
 
 function fetchAndRenderMenuData(menuType) {
-    fetch(`${web}get${menuType.slice(1)}`)
+    fetch(`${local}get${menuType.slice(1)}`)
         .then(res => res.text())
         .then(d => {
             let arr = JSON.parse(d)
