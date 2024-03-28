@@ -344,7 +344,14 @@ document.querySelector('aside').onclick = () => {
     }
 }
 
-div.onmousedown = e => {
+div.addEventListener('mousedown', endOfDrag)
+div.addEventListener('mousemove', moveDrag)
+div.addEventListener('mouseup', stopDrag)
+div.addEventListener('touchstart', endOfDrag)
+div.addEventListener('touchmove', moveDrag)
+div.addEventListener('touchend', stopDrag)
+
+function endOfDrag(e) {
     if (lengthOfNav() + countGap() + getPudding() > window.innerWidth - getPudding()) {
         div.style.transition = ''
         clicked = true
@@ -364,14 +371,18 @@ div.onmousedown = e => {
     }
 }
 
-document.onmousemove = e => {
+
+
+function moveDrag(e) {
     if (clicked) {
         moveX = e.clientX - x
         div.style.transform = `translateX(${moveX}px)`
     }
 }
 
-document.onmouseup = () => {
+
+
+function stopDrag() {
     if (!clicked) {
         return
     }
@@ -405,7 +416,6 @@ function lengthOfNav() {
     return sumWidth
 }
 
-console.log(countGap());
 function lastElemetDistance() {
     return lengthOfNav() + countGap() - window.innerWidth + getPudding()
 }
