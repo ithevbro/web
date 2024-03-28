@@ -344,18 +344,23 @@ document.querySelector('aside').onclick = () => {
     }
 }
 
-div.addEventListener('mousedown', endOfDrag)
-div.addEventListener('mousemove', moveDrag)
-div.addEventListener('mouseup', stopDrag)
-div.addEventListener('touchstart', endOfDrag)
-div.addEventListener('touchmove', moveDrag)
-div.addEventListener('touchend', stopDrag)
+div.addEventListener('mousedown', startDrag)
+document.addEventListener('mousemove', moveDrag)
+document.addEventListener('mouseup', stopDrag)
 
-function endOfDrag(e) {
+div.addEventListener('touchstart', startDrag);
+document.addEventListener('touchmove', moveDrag);
+document.addEventListener('touchend', stopDrag);
+
+function startDrag(e) {
     if (lengthOfNav() + countGap() + getPudding() > window.innerWidth - getPudding()) {
         div.style.transition = ''
         clicked = true
-        x = e.clientX - moveX
+        if (e.type === 'touchmove') {
+            x = e.touches[0].clientX - moveX;
+        } else {
+            x = e.clientX - moveX
+        }
         for (let i = 0; i < list.length; i++) {
             list[i].ondragstart = function () {
                 list[i].onclick = () => {
@@ -371,16 +376,17 @@ function endOfDrag(e) {
     }
 }
 
-
-
 function moveDrag(e) {
     if (clicked) {
-        moveX = e.clientX - x
+        if (e.type === 'touchmove') {
+            moveX = e.touches[0].clientX - x;
+        } else {
+            moveX = e.clientX - x;
+        }
+
         div.style.transform = `translateX(${moveX}px)`
     }
 }
-
-
 
 function stopDrag() {
     if (!clicked) {
