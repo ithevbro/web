@@ -72,14 +72,27 @@ function fetchAndRenderMenuData(menuType) {
 
 fetchAndRenderMenuData(window.location.pathname)
 
-navigation.forEach(item => {
-    item.addEventListener('click', function (e) {
-        e.preventDefault()
-        const path = this.getAttribute('href')
-        fetchAndRenderMenuData(path);
-        window.history.pushState({ path: path }, '', path);
-    });
-});
+// navigation.forEach(item => {
+//     item.addEventListener('click', function (e) {
+//         e.preventDefault()
+//         const path = this.getAttribute('href')
+//         fetchAndRenderMenuData(path);
+//         window.history.pushState({ path: path }, '', path);
+//     });
+// });
+
+div.parentElement.addEventListener('click', routeHandler)
+
+function routeHandler(e) {
+    let a = e.target.closest('a')
+    if (!a) {
+        return
+    }
+    e.preventDefault()
+    const path = a.getAttribute('href')
+    fetchAndRenderMenuData(path);
+    window.history.pushState({ path: path }, '', path);
+}
 
 function currentNav(path) {
     let prev = null
@@ -93,9 +106,10 @@ function currentNav(path) {
             }
         })
     }
+
     document.querySelector('nav').onclick = (e) => {
         let a = e.target.closest('a')
-        if (!a) {
+        if (!a || !clicked) {
             return
         }
         if (prev) {
@@ -340,7 +354,6 @@ document.querySelector('aside').onclick = () => {
             isHidden = false
             document.querySelector('.inner').style.overflow = 'visible'
         }, 400)
-
     }
 }
 
@@ -364,7 +377,6 @@ function startDrag(e) {
         for (let i = 0; i < list.length; i++) {
             list[i].ondragstart = function () {
                 list[i].onclick = () => {
-                    // console.log(list[i]);
                     tag = list[i]
                     return false
                 }
@@ -378,11 +390,16 @@ function startDrag(e) {
 }
 
 function moveDrag(e) {
+    let a = e.target.closest('a')
     if (clicked) {
         if (e.type == 'touchmove') {
             moveX = e.targetTouches[0].clientX - x
         } else {
             moveX = e.clientX - x
+            // console.log(e.clientY);
+            if (a) {
+                div.parentElement.removeEventListener('click', routeHandler);
+            }
         }
         div.style.transform = `translateX(${moveX}px)`
     }
@@ -393,8 +410,7 @@ function stopDrag() {
         return
     }
     clicked = false
-    setTimeout(() => { if (tag) tag.onclick = () => true })
-    let first = list[0].getBoundingClientRect().left
+    let first = list[0].getBoundingClientRect().left - getPudding()
     if (first > 0) {
         div.style.transition = 'all 0.4s'
         div.style.transform = 'translateX(0px)'
@@ -407,6 +423,11 @@ function stopDrag() {
         div.style.transform = `translateX(${-last}px)`
         moveX = -last
     }
+    setTimeout(() => {
+        if (tag) tag.onclick = () => true
+        div.parentElement.addEventListener('click', routeHandler);
+    })
+
 }
 
 function countGap() {
@@ -431,5 +452,8 @@ function getPudding() {
     return parseInt(computedStyle.getPropertyValue("padding-right")) * 2
 }
 
-
-
+window.addEventListener('resize', function () {
+    if (lengthOfNav() + countGap() + getPudding() < window.innerWidth) {
+        div.style.transform = 'translateX(0px)'
+    }
+});
