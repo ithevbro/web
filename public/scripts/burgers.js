@@ -348,12 +348,12 @@ div.parentElement.addEventListener('mousedown', startDrag)
 document.addEventListener('mousemove', moveDrag)
 document.addEventListener('mouseup', stopDrag)
 
-div.parentElement.addEventListener('touchstart', startDrag);
-document.addEventListener('touchmove', moveDrag);
-document.addEventListener('touchend', stopDrag);
+div.parentElement.addEventListener('touchstart', startDrag)
+document.addEventListener('touchmove', moveDrag)
+document.addEventListener('touchend', stopDrag)
 
 function startDrag(e) {
-    if (lengthOfNav() + countGap() + getPudding() > window.innerWidth - getPudding()) {
+    if (lengthOfNav() + countGap() + getPudding() > window.innerWidth) {
         div.style.transition = ''
         clicked = true
         if (e.type == 'touchstart') {
@@ -364,6 +364,7 @@ function startDrag(e) {
         for (let i = 0; i < list.length; i++) {
             list[i].ondragstart = function () {
                 list[i].onclick = () => {
+                    // console.log(list[i]);
                     tag = list[i]
                     return false
                 }
