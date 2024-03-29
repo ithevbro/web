@@ -344,11 +344,11 @@ document.querySelector('aside').onclick = () => {
     }
 }
 
-div.addEventListener('mousedown', startDrag)
+div.parentElement.addEventListener('mousedown', startDrag)
 document.addEventListener('mousemove', moveDrag)
 document.addEventListener('mouseup', stopDrag)
 
-div.addEventListener('touchstart', startDrag);
+div.parentElement.addEventListener('touchstart', startDrag);
 document.addEventListener('touchmove', moveDrag);
 document.addEventListener('touchend', stopDrag);
 
@@ -356,8 +356,8 @@ function startDrag(e) {
     if (lengthOfNav() + countGap() + getPudding() > window.innerWidth - getPudding()) {
         div.style.transition = ''
         clicked = true
-        if (e.type === 'touchmove') {
-            x = e.touches[0].clientX - moveX;
+        if (e.type == 'touchstart') {
+            x = e.targetTouches[0].clientX - moveX
         } else {
             x = e.clientX - moveX
         }
@@ -378,12 +378,11 @@ function startDrag(e) {
 
 function moveDrag(e) {
     if (clicked) {
-        if (e.type === 'touchmove') {
-            moveX = e.touches[0].clientX - x;
+        if (e.type == 'touchmove') {
+            moveX = e.targetTouches[0].clientX - x
         } else {
-            moveX = e.clientX - x;
+            moveX = e.clientX - x
         }
-
         div.style.transform = `translateX(${moveX}px)`
     }
 }
