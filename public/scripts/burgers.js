@@ -53,6 +53,7 @@ function fetchAndRenderMenuData(menuType) {
                     <p>${inCart[key].weight}</p>
                     <p>${inCart[key].price}грн</p>
                 </section>
+                <div id="del-${inCart[key].id}" class="remove-from-cart">&#9249;</div>
                 <div class="minus-plus">
                     <button id="minus-${inCart[key].id}">-</button>
                     <div id='cartProducts-${inCart[key].id}'>${inCart[key].qunt}</div>
@@ -220,6 +221,8 @@ document.querySelector('.single-product').onclick = (e) => {
             document.getElementById(`cartProducts-${id}`).textContent = allProductsData[id].qunt
             counter.textContent = allProductsData[id].qunt
             cart_count.textContent = +cart_count.textContent + 1
+            sumPrice()
+            saveCartToLocal()
         }
         else {
             allProductsData[id].qunt += 1
@@ -236,6 +239,8 @@ document.querySelector('.single-product').onclick = (e) => {
             document.getElementById(`cartProducts-${id}`).textContent = allProductsData[id].qunt
             counter.textContent = allProductsData[id].qunt
             cart_count.textContent = +cart_count.textContent - 1
+            sumPrice()
+            saveCartToLocal()
         } else {
             allProductsData[id].qunt -= 1
             counter.textContent = allProductsData[id].qunt
@@ -250,6 +255,7 @@ document.querySelector('.single-product').onclick = (e) => {
             <p>${allProductsData[id].weight}</p>
             <p>${allProductsData[id].price}грн</p>
         </section>
+        <div id="del-${id}" class="remove-from-cart">&#9249;</div>
         <div class="minus-plus">
             <button id="minus-${id}">-</button>
             <div id='cartProducts-${id}'>${allProductsData[id].qunt}</div>
@@ -281,7 +287,8 @@ function setCartProductsListeners() {
             let counter = document.getElementById('cartProducts-' + id)
             let plus = e.target.closest('#plus-' + id)
             let minus = e.target.closest('#minus-' + id)
-            if (!plus && !minus) {
+            let del = e.target.closest('#del-' + id)
+            if (!plus && !minus && !del) {
                 return
             }
             if (plus) {
@@ -300,6 +307,14 @@ function setCartProductsListeners() {
                 allProductsData[id].qunt -= 1
                 counter.textContent = allProductsData[id].qunt
                 cart_count.textContent = +cart_count.textContent - 1
+                sumPrice()
+                saveCartToLocal()
+            }
+            if (del) {
+                cart_count.textContent -= inCart[id].qunt
+                del.parentElement.remove()
+                setCartProductsListeners()
+                delete inCart[id]
                 sumPrice()
                 saveCartToLocal()
             }
@@ -331,8 +346,10 @@ function sumPrice() {
 
     if (parseInt(document.getElementById('cart-total-price').textContent) > 0) {
         document.querySelector('.wrapper').style.display = 'grid'
+        document.getElementById('cart-empty').style.display = 'none'
     } else {
         document.querySelector('.wrapper').style.display = 'none'
+        document.getElementById('cart-empty').style.display = 'block'
     }
     if (parseInt(document.getElementById('cart-total-price').textContent) >= 1500) {
         document.getElementById('free-delivery').style.display = 'flex'
@@ -366,7 +383,7 @@ document.addEventListener('touchmove', moveDrag)
 document.addEventListener('touchend', stopDrag)
 
 function startDrag(e) {
-    if (lengthOfNav() + countGap() + getPudding() > window.innerWidth) {
+    if (lengthOfNav() + countGap() + getPudding() * 2 > window.innerWidth) {
         div.style.transition = ''
         clicked = true
         if (e.type == 'touchstart') {
@@ -444,16 +461,17 @@ function lengthOfNav() {
 }
 
 function lastElemetDistance() {
-    return lengthOfNav() + countGap() - window.innerWidth + getPudding()
+    return lengthOfNav() + countGap() - window.innerWidth + getPudding() * 2
 }
 
 function getPudding() {
     let computedStyle = window.getComputedStyle(document.querySelector('nav'));
-    return parseInt(computedStyle.getPropertyValue("padding-right")) * 2
+    return parseInt(computedStyle.getPropertyValue("padding-right"))
 }
 
 window.addEventListener('resize', function () {
     if (lengthOfNav() + countGap() + getPudding() < window.innerWidth) {
         div.style.transform = 'translateX(0px)'
+        moveX = 0
     }
 });
