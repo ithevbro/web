@@ -312,6 +312,7 @@ function setCartProductsListeners() {
             }
             if (del) {
                 cart_count.textContent -= inCart[id].qunt
+                allProductsData[id].qunt = 1
                 del.parentElement.remove()
                 setCartProductsListeners()
                 delete inCart[id]
