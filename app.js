@@ -8,6 +8,7 @@ const client = new MongoClient(uri)
 const dbName = 'test'
 let { arr, arr2 } = require('./data')
 const router = express.Router()
+const js = express.json()
 
 app.use(express.static('public'))
 
@@ -20,6 +21,11 @@ app.get('/zakuski', (req, res) => {
 app.get('/hotdogs', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
+app.post('/haha', js, (req, res) => {
+    arr.push(req.body)
+    res.send('loh')
+})
 
 app.get('/get', (req, res) => {
     res.send(JSON.stringify(arr));
